@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*Containers*/
+.container {
+    margin: 5vh;
+}
+
+.button-container {
+    margin: 2vh 0;
+}

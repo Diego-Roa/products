@@ -1,0 +1,47 @@
+<nz-table #genericTable nzShowPagination nzBordered [nzData]="table.data">
+  <thead>
+    <tr>
+      @for (column of table.columns; track $index) {
+      <th>{{ column.value }}</th>
+      } @if (table.showActions) {
+      <th>Acciones</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of genericTable.data; track $index) {
+    <tr>
+      @for (column of table.columns; track $index) {
+      <td>{{ row[column.key] | dynamic : column.pipe : column.pipeArgs }}</td>
+      } @if (table.showActions) {
+      <td>
+        <div
+          nz-flex
+          [nzVertical]="false"
+          nzJustify="space-around"
+          nzAlign="center"
+        >
+          <button
+            nz-button
+            nzType="primary"
+            nzShape="circle"
+            (click)="updateRow(row)"
+          >
+            <nz-icon nzType="edit" />
+          </button>
+          <button
+            nz-button
+            nzType="default"
+            nzShape="circle"
+            nzDanger
+            (click)="deleteRow(row)"
+          >
+            <nz-icon nzType="delete" />
+          </button>
+        </div>
+      </td>
+      }
+    </tr>
+    }
+  </tbody>
+</nz-table>

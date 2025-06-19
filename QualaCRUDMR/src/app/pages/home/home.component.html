@@ -1,0 +1,94 @@
+<div class="container">
+  @if (showTable) {
+  <div nz-flex [nzVertical]="false" nzJustify="space-between" nzAlign="center">
+    <div class="button-container">
+      <button nz-button nzType="primary" nzSize="default" (click)="showModalToCreate()">
+        <nz-icon nzType="plus" />
+        Crear producto
+      </button>
+    </div>
+    <div>
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input
+          nz-input
+          [(ngModel)]="searchText"
+          placeholder="Buscar..."
+          (ngModelChange)="search()"
+        />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <nz-icon nzType="search" />
+      </ng-template>
+    </div>
+  </div>
+  <div>
+    <app-table
+      [table]="table"
+      (deleteChange)="deleteProduct($event)"
+      (updateChange)="updateProductSignal($event)"
+    ></app-table>
+  </div>
+  <nz-modal
+    [(nzVisible)]="isVisibleForm"
+    [nzTitle]="titleForm"
+    (nzOnCancel)="closeModal()"
+    (nzOnOk)="onSubmit()"
+    [nzContent]="modalContent"
+    [nzOkLoading]="isOkLoading"
+  >
+    <ng-template #modalContent>
+      <form nz-form [formGroup]="productForm" class="product-form">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzFor="name" nzRequired>Nombre</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <input nz-input formControlName="name" type="text" id="name" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzFor="description" nzRequired>Descripción</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <nz-textarea-count [nzMaxCharacterCount]="250">
+            <textarea formControlName="description" nz-input rows="2" placeholder="write any thing"></textarea>
+          </nz-textarea-count>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzFor="reference" nzRequired>Referencia interna</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <input nz-input formControlName="reference" type="text" id="reference" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzFor="unitPrice" nzRequired>Precio Unitario</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <input nz-input formControlName="unitPrice" type="text" id="unitPrice" placeholder="0.00"/>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzFor="status" nzRequired>Estado</nz-form-label>
+        <nz-form-control [nzSpan]="14" nzErrorTip="Please select your gender!">
+          <nz-select id="status" formControlName="status" nzPlaceHolder="Select a option and change input text above">
+            <nz-option [nzValue]="true" nzLabel="Activo"></nz-option>
+            <nz-option [nzValue]="false" nzLabel="Inactivo"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzFor="unitMeasurement" nzRequired>Unidad de medida</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <input nz-input formControlName="unitMeasurement" type="text" id="unitMeasurement"/>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="7" [nzXs]="7" nzRequired
+            >Fecha de creación</nz-form-label
+          >
+          <nz-form-control [nzSpan]="14">
+            <nz-date-picker formControlName="createdAt" [nzDisabledDate]="disableAfterToday"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </ng-template>
+  </nz-modal>
+  }
+</div>
