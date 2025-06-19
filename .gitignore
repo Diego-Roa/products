@@ -1,0 +1,78 @@
+# ===============================
+# GLOBAL
+# ===============================
+# IDEs / Sistemas operativos
+.vscode/
+.idea/
+*.swp
+*.swo
+*.log
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.tmp
+*.bak
+
+# Entornos y secretos
+.env
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ===============================
+# ANGULAR (FRONTEND)
+# ===============================
+/QualaCRUDMR/node_modules/
+/QualaCRUDMR/dist/
+/QualaCRUDMR/.angular/
+/QualaCRUDMR/.angular/cache/
+/QualaCRUDMR/.cache/
+/QualaCRUDMR/coverage/
+/QualaCRUDMR/tmp/
+/QualaCRUDMR/package-lock.json
+
+# ===============================
+# .NET 8.0 (BACKEND)
+# ===============================
+/TaskManagementBack/bin/
+/TaskManagementBack/obj/
+/TaskManagementBack/.vs/
+/TaskManagementBack/.vscode/
+/TaskManagementBack/Properties/launchSettings.json
+
+# Build outputs
+*.dll
+*.exe
+*.pdb
+*.db
+*.mdb
+*.log
+*.suo
+*.user
+*.cache
+*.csproj.user
+
+# Configuración global de dotnet/nuget
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Core
+/TaskManagementBack/wwwroot/
+
+# Secretos de desarrollo
+/TaskManagementBack/appsettings.json
+/TaskManagementBack/appsettings.Development.json
+/TaskManagementBack/appsettings.*.json
+
+# ===============================
+# OTROS (OPCIONAL)
+# ===============================
+# Logs
+*.log
+
+# Archivos de pruebas de unit tests
+TestResults/
