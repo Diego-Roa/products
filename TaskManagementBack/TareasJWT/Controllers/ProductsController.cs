@@ -11,19 +11,19 @@ namespace TaskManagement.Controllers
     /// Controlador REST para gestionar tareas
     /// Proporciona endpoints para obtener, crear, editar y eliminar tareas
     /// 
-    /// <p> Autor: Sebastian Roa </p>
+    /// <remarks>
+    /// Autor: Sebastian Roa
+    /// </remarks>
     /// </summary>
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [Authorize]
     [ApiController]
     public class ProductsController : Controller
     {
-        private readonly UnitOfWork unitOfWork;
         private readonly ProductsService productsService;
 
-        public ProductsController(UnitOfWork unitOfWork, ProductsService productsService)
+        public ProductsController(ProductsService productsService)
         {
-            this.unitOfWork = unitOfWork;
             this.productsService = productsService;
         }
 
@@ -33,19 +33,41 @@ namespace TaskManagement.Controllers
         /// <param name="productDTO">DTO con los parametros de la tarea a crear</param>
         /// <returns> Mensaje con el exito o fracaso de la operación.</returns>
         [HttpPost()]
-        public async Task<ResponseDTO> createProduct([FromBody] ProductDTO productDTO)
+        public ResponseDTO CreateProduct([FromBody] ProductDTO productDTO)
         {
             return productsService.createProduct(productDTO);
         }
-        
+
         /// <summary>
-        /// Endpoint para obtener las tareas segun el rol del usuario
+        /// Endpoint para obtener los productos
         /// </summary>
-        /// <returns> Lista de tareas por usuario</returns>
+        /// <returns> Lista de productos</returns>
         [HttpGet()]
-        public ResponseDTO<List<ProductDTO>> getTasks()
+        public ResponseDTO<List<ProductDTO>> GetProducts()
         {
             return productsService.getProducts();
+        }
+
+        /// <summary>
+        /// Endpoint para actualizar un producto
+        /// </summary>
+        /// <param name="productDTO">DTO con los parametros del producto a actualizar</param>
+        /// <returns> Mensaje con el exito o fracaso de la operación.</returns>
+        [HttpPut("{id}")]
+        public ResponseDTO UpdateProduct([FromRoute] int id, [FromBody] ProductDTO productDTO)
+        {
+            return productsService.updateProduct(id, productDTO);
+        }
+
+        /// <summary>
+        /// Endpoint para eliminar un producto
+        /// </summary>
+        /// <param name="productDTO">DTO con los parametros del producto a actualizar</param>
+        /// <returns> Mensaje con el exito o fracaso de la operación.</returns>
+        [HttpDelete("{id}")]
+        public ResponseDTO DeleteProduct([FromRoute] int id)
+        {
+            return productsService.deleteProduct(id);
         }
     }
 }

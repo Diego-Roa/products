@@ -16,7 +16,7 @@ namespace TaskManagement.Controllers
     /// </summary>
     [ApiController]
     [Authorize]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class LoginController
     {
 

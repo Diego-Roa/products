@@ -57,5 +57,38 @@ namespace TaskManagement.Services.Services
             products = _mapper.Map<List<ProductDTO>>(unitOfWork.Crud<ProductsEntity>().GetAll().ToList());
             return new ResponseDTO<List<ProductDTO>>(true, "Productos obtenidos exitosamente", products);
         }
+
+        /// <summary>
+        /// Actualizar un producto Producto.
+        /// </summary>
+        /// <returns>Mensaje con exito o fracaso de la operación</returns>
+        public ResponseDTO updateProduct(int id, ProductDTO productDTO)
+        {
+            var product = new ProductsEntity()
+            {
+                Id = id,
+                Name = productDTO.Name,
+                Description = productDTO.Description,
+                Reference = productDTO.Reference,
+                UnitPrice = productDTO.UnitPrice,
+                Status = productDTO.Status,
+                UnitMeasurement = productDTO.UnitMeasurement,
+                CreatedAt = productDTO.CreatedAt,
+            };
+            unitOfWork.Crud<ProductsEntity>().Update(product);
+            unitOfWork.SaveChanges();
+            return new ResponseDTO(true, "Producto actualizado exitosamente");
+        }
+        
+        /// <summary>
+        /// Elimina un producto por su id
+        /// </summary>
+        /// <param name="id"->Id del producto a eliminar </param>
+        public ResponseDTO deleteProduct(int id)
+        {
+            unitOfWork.Crud<ProductsEntity>().Delete(unitOfWork.Crud<ProductsEntity>().Get(s => s.Id == id).First());
+            unitOfWork.SaveChanges();
+            return new ResponseDTO(true, "Producto eliminado exitosamente");
+        }
     }
 }
