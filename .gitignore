@@ -36,11 +36,17 @@ Thumbs.db
 # ===============================
 # .NET 8.0 (BACKEND)
 # ===============================
-/TaskManagementBack/bin/
-/TaskManagementBack/obj/
-/TaskManagementBack/.vs/
-/TaskManagementBack/.vscode/
-/TaskManagementBack/Properties/launchSettings.json
+/TaskManagementBack/TareasJWT/bin/
+/TaskManagementBack/TareasJWT/obj/
+/TaskManagementBack/TareasJWT/.vs/
+/TaskManagementBack/TareasJWT/.vscode/
+/TaskManagementBack/TareasJWT/Properties/launchSettings.json
+
+/TaskManagementBack/TaskManagement.DataAccess/bin/
+/TaskManagementBack/TaskManagement.DataAccess/obj/
+
+/TaskManagementBack/TaskManagement.Services/bin/
+/TaskManagementBack/TaskManagement.Services/obj/
 
 # Build outputs
 *.dll

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,24 +8,24 @@ using System.Threading.Tasks;
 
 namespace TaskManagement.DataAccess.Entities
 {
-    [Table("TaskManagement")]
-    public class TaskManagementEntity
+    [Table("Products")]
+    public class ProductsEntity
     {
         [Key]
-        public int TaskId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
         public string Description { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public string Reference { get; set; }
 
-        public DateTime UpdatedDate { get; set; }
+        public decimal UnitPrice { get; set; }
 
-        public string Status { get; set; }
+        public bool Status { get; set; }
 
-        public string Executor { get; set; }
+        public string UnitMeasurement { get; set; }
 
-        public string Supervisor { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

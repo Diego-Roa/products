@@ -12,6 +12,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { ResponseHttp } from '../../interfaces/response-access';
 
 @Component({
   selector: 'app-home',
@@ -51,7 +52,7 @@ export class HomeComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.productForm = fb.group({
-      id: new FormControl(''),
+      id: new FormControl(null),
       name: new FormControl('', [Validators.required, Validators.maxLength(250)]),
       description: new FormControl('', [Validators.required, Validators.maxLength(250)]),
       reference: new FormControl('', [Validators.required, Validators.maxLength(100)]),
@@ -68,8 +69,8 @@ export class HomeComponent implements OnInit {
 
   getProducts(): void {
     this.productsService.getProducts().subscribe({
-      next: (response: any) => {
-        this.products = response;
+      next: (response: ResponseHttp<Product[]>) => {
+        this.products = response.data;
         this.table = {
           columns: [
             { key: 'id', value: 'Código Producto' },
@@ -133,7 +134,7 @@ export class HomeComponent implements OnInit {
 
   showModalToCreate(): void {
     this.productForm.patchValue({
-      id: '',
+      id: null,
       name: '',
       description: '',
       reference: '',
@@ -159,7 +160,7 @@ export class HomeComponent implements OnInit {
       this.isOkLoading = false;
       return;
     }
-    this.productForm.get('id')?.value != '' ?  this.updateProduct(this.productForm.value) : this.createProduct(this.productForm.value)
+    this.productForm.get('id')?.value != null ?  this.updateProduct(this.productForm.value) : this.createProduct(this.productForm.value)
   }
 
   createProduct(newProduct: Product): void {

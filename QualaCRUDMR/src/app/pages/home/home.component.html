@@ -1,5 +1,5 @@
 <div class="container">
-  @if (showTable) {
+  
   <div nz-flex [nzVertical]="false" nzJustify="space-between" nzAlign="center">
     <div class="button-container">
       <button nz-button nzType="primary" nzSize="default" (click)="showModalToCreate()">
@@ -21,6 +21,7 @@
       </ng-template>
     </div>
   </div>
+  @if (showTable) {
   <div>
     <app-table
       [table]="table"
@@ -28,6 +29,7 @@
       (updateChange)="updateProductSignal($event)"
     ></app-table>
   </div>
+  }
   <nz-modal
     [(nzVisible)]="isVisibleForm"
     [nzTitle]="titleForm"
@@ -90,5 +92,4 @@
       </form>
     </ng-template>
   </nz-modal>
-  }
 </div>

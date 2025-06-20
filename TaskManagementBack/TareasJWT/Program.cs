@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using TaskManagement.Services.Services;
 using TaskManagement;
+using TaskManagement.Services.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Configurar Identity
 builder.Services.AddIdentity<AplicationUserEntity, AplicationRoleEntity>(options =>
 {
-    // Configura las opciones de contraseña según tus necesidades
+    // Configura las opciones de contraseï¿½a segï¿½n tus necesidades
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = false;
@@ -31,7 +32,7 @@ builder.Services.AddIdentity<AplicationUserEntity, AplicationRoleEntity>(options
 
 // Configurar IdentityServer
 builder.Services.AddIdentityServer()
-    .AddDeveloperSigningCredential() // Usa certificados de desarrollo. En producción, usa certificados válidos.
+    .AddDeveloperSigningCredential() // Usa certificados de desarrollo. En producciï¿½n, usa certificados vï¿½lidos.
     .AddAspNetIdentity<AplicationUserEntity>()
     .AddInMemoryIdentityResources(TaskManagement.Config.IdentityResources)
     .AddInMemoryApiScopes(TaskManagement.Config.ApiScopes)
@@ -65,11 +66,19 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddTransient<LoginService>();
 builder.Services.AddTransient<PermissionService>();
 builder.Services.AddTransient<TaskService>();
+builder.Services.AddTransient<ProductsService>();
 builder.Services.AddScoped<DbContext, ApplicationDbContext>();
 builder.Services.AddScoped(typeof(UnitOfWork));
 
 // Agregar controladores
 builder.Services.AddControllers();
+
+//Agregar Mapper
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+//Agregar swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // Configurar CORS si es necesario
 builder.Services.AddCors(options =>
@@ -87,6 +96,8 @@ var app = builder.Build();
 // Configurar el pipeline
 if (app.Environment.IsDevelopment())
 {
+    app.UseSwagger();
+    app.UseSwaggerUI();
     app.UseDeveloperExceptionPage();
 }
 
@@ -97,7 +108,7 @@ app.UseRouting();
 // Usar IdentityServer
 app.UseIdentityServer();
 
-// Usar autenticación y autorización
+// Usar autenticaciï¿½n y autorizaciï¿½n
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -39,7 +39,7 @@ namespace TaskManagement.Controllers
         /// <param name="loginDto">DTO con el username y password</param>
         /// <returns> Mensaje con el exito o fracaso de la operación.</returns>
         [AllowAnonymous]
-        [HttpPost("login")]
+        [HttpPost()]
         public async Task<ResponseDTO<TokenDTO>> Login([FromBody] LoginDTO loginDto)
         {
             var jwtSettings = _configuration.GetSection("Jwt");

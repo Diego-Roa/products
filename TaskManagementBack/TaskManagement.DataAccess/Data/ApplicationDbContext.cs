@@ -16,7 +16,8 @@ namespace TaskManagement.DataAccess
         public DbSet<MenuEntity> Menus { get; set; }
         public DbSet<PermissionEntity> Permissions { get; set; }
         public DbSet<TaskManagementEntity> Task { get; set; }
-        public DbSet<AplicationUserEntity> Users {  get; set; }
+        public DbSet<ProductsEntity> Products { get; set; }
+        public DbSet<AplicationUserEntity> Users { get; set; }
 
     }
 }
